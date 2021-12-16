@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  ig_db:
+    image: postgres
+    container_name: ig_db 
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker-user
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=rentx
+    volumes:
+      - pgdata:/data/postgres
+  app:
+    build: . 
+    container_name: rentx
+    restart: always
+    ports: 
+      - 3333:3333
+    volumes:
+      - .:/usr/app 
+    links:
+      - ig_db 
+    depends_on:
+      - ig_db 
+
+volumes:
+  pgdata:
+    driver: local
