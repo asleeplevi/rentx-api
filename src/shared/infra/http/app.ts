@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express'
+import cors from 'cors'
 import 'express-async-errors'
 import swaggerUI from 'swagger-ui-express'
 
@@ -13,7 +14,7 @@ createConnection()
 const app = express()
 
 app.use(express.json())
-
+app.use(cors())
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 app.use(router)
 app.use('/avatar', express.static(`${upload.tmpFolder}/avatar`))
