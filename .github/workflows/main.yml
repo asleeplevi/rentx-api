@@ -22,5 +22,6 @@ jobs:
           script: |
             cd ~/app/rentx-api/
             ls -la
+            yarn install
     
     
