@@ -36,8 +36,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/app/rentx-api
-            yarn
-            ./node_modules/.bin/typeorm migration:run
-            pm2 restart rentx_api
+          script: "cd ~/app/rentx-api && yarn && ./node_modules/.bin/typeorm migration:run &&  pm2 restart rentx_api"
+    
+    
+    
