@@ -23,7 +23,8 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ~/app/rentx-api/
-            ls -la
             yarn install
+            ./node_modules/.bin/typeorm migration:run
+            pm2 restart rentx_api
     
     
