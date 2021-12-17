@@ -12,6 +12,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: Install Dependencies
+        run: yarn
+      - name: Build 
+        run: yarn build
+      - name: Copy file via ssh to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "., !node_modules"
+          target: "~/app/rentx-api"
       - name: Update API
         uses: appleboy/ssh-action@master
         with:
